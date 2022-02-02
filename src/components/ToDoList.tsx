@@ -24,11 +24,16 @@ function ToDoList() {
     setAddCategories((oldcate) => [{ text: Addcategories }, ...oldcate]);
     setValue("Addcategories", "");
   };
-  console.log(AddCategories);
+  const Catetext = [] as any;
+  AddCategories?.map((categoryee) => Catetext.push(categoryee.text));
+  localStorage.setItem("Catetext", JSON.stringify(Catetext));
+  const savedCategory = localStorage.getItem("Catetext") as any;
+  if (savedCategory !== null) {
+    const parsedCategory = JSON.parse(savedCategory);
+  }
   const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
     setCategory(event.currentTarget.value as any);
   };
-  console.log(toDos);
   return (
     <div>
       <h1>Crate new category</h1>
@@ -42,9 +47,9 @@ function ToDoList() {
         <option value={Categories.TO_DO}>To Do</option>
         <option value={Categories.DOING}>Doing</option>
         <option value={Categories.DONE}>Done</option>
-        {AddCategories?.map((AddCategory) => {
-          <option value={AddCategory.text}>AddCategory.text</option>;
-        })}
+        {JSON.parse(savedCategory)?.map((addcate: string | undefined) => (
+          <option value={addcate}>addcate</option>
+        ))}
       </select>
       <CreateToDo />
       {toDos?.map((toDo) => (
