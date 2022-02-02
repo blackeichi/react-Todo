@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/jwreactclass/static/js/main.f614f391.chunk.js",
-    "main.js.map": "/jwreactclass/static/js/main.f614f391.chunk.js.map",
+    "main.js": "/jwreactclass/static/js/main.3a3fc27a.chunk.js",
+    "main.js.map": "/jwreactclass/static/js/main.3a3fc27a.chunk.js.map",
     "runtime-main.js": "/jwreactclass/static/js/runtime-main.04b08368.js",
     "runtime-main.js.map": "/jwreactclass/static/js/runtime-main.04b08368.js.map",
     "static/js/2.a1c05a7b.chunk.js": "/jwreactclass/static/js/2.a1c05a7b.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.04b08368.js",
     "static/js/2.a1c05a7b.chunk.js",
-    "static/js/main.f614f391.chunk.js"
+    "static/js/main.3a3fc27a.chunk.js"
   ]
 }
