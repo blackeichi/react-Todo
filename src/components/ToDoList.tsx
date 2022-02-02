@@ -41,8 +41,9 @@ function ToDoList() {
         <input {...register("Addcategories")} placeholder="Create category" />
         <button>Add</button>
       </form>
-      <h1>To Dos</h1>
       <hr />
+      <hr />
+      <h1>To Dos</h1>
       <select value={category} onInput={onInput}>
         <option value={Categories.TO_DO}>To Do</option>
         <option value={Categories.DOING}>Doing</option>
