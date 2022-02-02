@@ -48,7 +48,7 @@ function ToDoList() {
         <option value={Categories.DOING}>Doing</option>
         <option value={Categories.DONE}>Done</option>
         {JSON.parse(savedCategory)?.map((addcate: string | undefined) => (
-          <option value={addcate}>addcate</option>
+          <option value={addcate}>{addcate}</option>
         ))}
       </select>
       <CreateToDo />
