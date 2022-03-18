@@ -19,10 +19,13 @@ function ToDoList() {
   const AddCategories = useRecoilValue(categoriesState);
   const setAddCategories = useSetRecoilState(categoriesState);
   const [category, setCategory] = useRecoilState(categoryState);
+  //== useRecoilValue와 useSetRecoilState을 같이 쓰는 것과 같다.
   const { handleSubmit, register, setValue } = useForm<IForm>();
   const onValid = ({ Addcategories }: IForm) => {
     setAddCategories((oldcate) => [{ text: Addcategories }, ...oldcate]);
+    //이전데이터 + Addcategories를 한다.
     setValue("Addcategories", "");
+    //값 초기화
   };
   const Catetext = [] as any;
   AddCategories?.map((categoryee) => Catetext.push(categoryee.text));
