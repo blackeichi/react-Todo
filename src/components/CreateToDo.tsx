@@ -14,6 +14,7 @@ function CreateToDo() {
   const handleValid = ({ toDo }: IForm) => {
     setToDos((oldToDos) => [
       { text: toDo, id: Date.now(), category },
+      //ToDoList.tsx에 select에 따라 category의 값이 변함. 현재 선택된 값이 들어감
       ...oldToDos,
     ]);
     setValue("toDo", "");

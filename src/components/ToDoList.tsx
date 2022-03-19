@@ -36,6 +36,7 @@ function ToDoList() {
   }
   const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
     setCategory(event.currentTarget.value as any);
+    //선택한 select option값에따라 atom의 category값이 변하고, selector를 이용하여 atom의 category값과 todo.category의 값이 같은 것만 출력됨
   };
   return (
     <div>
