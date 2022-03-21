@@ -1,20 +1,22 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  Categories,
-  categoryState,
-  categoriesState,
-  toDoSelector,
-} from "../atoms";
+import { categoryState, categoriesState, toDoSelector } from "../atoms";
 import CreateToDo from "./CreateToDo";
 import ToDo from "./ToDo";
+
+let Catetext = [] as any;
 
 interface IForm {
   Addcategories: string;
 }
 
 function ToDoList() {
+  const savedCategory = localStorage.getItem("Cate-text");
+  const parsedCategory = JSON.parse(savedCategory as any);
+  Catetext = parsedCategory === null ? [] : parsedCategory;
+  const setLocalCategory = () =>
+    localStorage.setItem("Cate-text", JSON.stringify(Catetext));
   const toDos = useRecoilValue(toDoSelector);
   const AddCategories = useRecoilValue(categoriesState);
   const setAddCategories = useSetRecoilState(categoriesState);
@@ -22,18 +24,20 @@ function ToDoList() {
   //== useRecoilValue와 useSetRecoilState을 같이 쓰는 것과 같다.
   const { handleSubmit, register, setValue } = useForm<IForm>();
   const onValid = ({ Addcategories }: IForm) => {
-    setAddCategories((oldcate) => [{ text: Addcategories }, ...oldcate]);
+    setAddCategories((oldcate) => [
+      { text: Addcategories, id: Date.now() },
+      ...oldcate,
+    ]);
     //이전데이터 + Addcategories를 한다.
     setValue("Addcategories", "");
     //값 초기화
+    const newCate = {
+      text: Addcategories,
+      id: Date.now(),
+    };
+    Catetext.push(newCate);
+    setLocalCategory();
   };
-  const Catetext = [] as any;
-  AddCategories?.map((categoryee) => Catetext.push(categoryee.text));
-  localStorage.setItem("Catetext", JSON.stringify(Catetext));
-  const savedCategory = localStorage.getItem("Catetext") as any;
-  if (savedCategory !== null) {
-    const parsedCategory = JSON.parse(savedCategory);
-  }
   const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
     setCategory(event.currentTarget.value as any);
     //선택한 select option값에따라 atom의 category값이 변하고, selector를 이용하여 atom의 category값과 todo.category의 값이 같은 것만 출력됨
@@ -49,11 +53,13 @@ function ToDoList() {
       <hr />
       <h1>To Dos</h1>
       <select value={category} onInput={onInput}>
-        <option value={Categories.TO_DO}>To Do</option>
-        <option value={Categories.DOING}>Doing</option>
-        <option value={Categories.DONE}>Done</option>
-        {JSON.parse(savedCategory)?.map((addcate: string | undefined) => (
-          <option value={addcate}>{addcate}</option>
+        <option value={"TO_DO"}>To Do</option>
+        <option value={"DOING"}>Doing</option>
+        <option value={"DONE"}>Done</option>
+        {AddCategories?.map((addcate) => (
+          <option key={addcate.id} value={addcate.text}>
+            {addcate.text}
+          </option>
         ))}
       </select>
       <CreateToDo />

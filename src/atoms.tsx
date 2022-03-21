@@ -1,34 +1,35 @@
 import { atom, selector } from "recoil";
 
-export enum Categories {
-  "TO_DO" = "TO_DO",
-  "DOING" = "DOING",
-  "DONE" = "DONE",
-}
-//enum은 type을 모든 곳에서 사용할 수 있게해줌
+const getTodo = window.localStorage.getItem("Todooos");
+const parsedTodo = JSON.parse(getTodo as any);
+const savedCategory = localStorage.getItem("Cate-text");
+const parsedCategory = JSON.parse(savedCategory as any);
+
 export interface IToDo {
   text: string;
   id: number;
-  category: Categories;
+  category: string;
 }
 export interface ICate {
   text: string;
+  id: number;
 }
 
-export const categoryState = atom<Categories>({
+export const categoryState = atom({
   key: "category",
-  default: Categories.TO_DO,
+  default: "TO_DO",
 });
 
 export const categoriesState = atom<ICate[]>({
   key: "Addcategories",
-  default: [],
+  default: parsedCategory === null ? [] : parsedCategory,
 });
 
 export const toDoState = atom<IToDo[]>({
   key: "toDo",
-  default: [],
+  default: parsedTodo === null ? [] : parsedTodo,
 });
+//
 
 export const toDoSelector = selector({
   key: "toDoSelector",
