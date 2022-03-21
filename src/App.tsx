@@ -59,6 +59,8 @@ body {
   background-color:grey;
   color:white;
   line-height: 1.2;
+  width : 100%;
+  hight : 100vh;
 }
 a {
   text-decoration:none;

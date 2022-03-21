@@ -4,6 +4,8 @@ const getTodo = window.localStorage.getItem("Todooos");
 const parsedTodo = JSON.parse(getTodo as any);
 const savedCategory = localStorage.getItem("Cate-text");
 const parsedCategory = JSON.parse(savedCategory as any);
+const login = window.localStorage.getItem("login");
+const parsedLogin = JSON.parse(login as any);
 
 export interface IToDo {
   text: string;
@@ -29,7 +31,11 @@ export const toDoState = atom<IToDo[]>({
   key: "toDo",
   default: parsedTodo === null ? [] : parsedTodo,
 });
-//
+//-------------------------------------------------
+export const usernameState = atom({
+  key: "username",
+  default: parsedLogin === null ? null : parsedLogin,
+});
 
 export const toDoSelector = selector({
   key: "toDoSelector",
