@@ -14,12 +14,21 @@ import ToDo from "./ToDo";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(150deg, #5f0a87, #a4508b);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+const ToDoPaper = styled.div`
+  color: black;
+  width: 400px;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 `;
 
 const CateForm = styled.form`
@@ -66,41 +75,51 @@ function ToDoList() {
   };
   //------------------------------------------------------------
   const [login, setLogin] = useState(false);
-
+  const onClick = () => {
+    window.localStorage.setItem("login", null as any);
+    window.location.reload();
+  };
   return (
-    <Wrapper>
-      {getUsername === null ? (
-        <Login />
-      ) : (
-        <>
-          <CateForm>
-            <h1>Crate new category</h1>
-            <form onSubmit={handleSubmit(onValid)}>
-              <input
-                {...register("Addcategories")}
-                placeholder="Create category"
-              />
-              <button>Add</button>
-            </form>
-          </CateForm>
-          <h1>To Dos</h1>
-          <select value={category} onInput={onInput}>
-            <option value={"TO_DO"}>To Do</option>
-            <option value={"DOING"}>Doing</option>
-            <option value={"DONE"}>Done</option>
-            {AddCategories?.map((addcate) => (
-              <option key={addcate.id} value={addcate.text}>
-                {addcate.text}
-              </option>
-            ))}
-          </select>
-          <CreateToDo />
+    <>
+      <Wrapper>
+        {getUsername === null ? (
+          <Login />
+        ) : (
+          <>
+            <span>Welcome! {getUsername.username}</span>
+            <button onClick={onClick}>Log Out</button>
+            <CateForm>
+              <h1>Crate new category</h1>
+              <form onSubmit={handleSubmit(onValid)}>
+                <input
+                  {...register("Addcategories")}
+                  placeholder="Create category"
+                />
+                <button>Add</button>
+              </form>
+            </CateForm>
+            <h1>To Dos</h1>
+            <select value={category} onInput={onInput}>
+              <option value={"TO_DO"}>To Do</option>
+              <option value={"DOING"}>Doing</option>
+              <option value={"DONE"}>Done</option>
+              {AddCategories?.map((addcate) => (
+                <option key={addcate.id} value={addcate.text}>
+                  {addcate.text}
+                </option>
+              ))}
+            </select>
+            <CreateToDo />
+          </>
+        )}
+        <ToDoPaper>
+          <h1 style={{ marginBottom: "20px" }}>Todo List</h1>
           {toDos?.map((toDo) => (
             <ToDo key={toDo.id} {...toDo} />
           ))}
-        </>
-      )}
-    </Wrapper>
+        </ToDoPaper>
+      </Wrapper>
+    </>
   );
 }
 

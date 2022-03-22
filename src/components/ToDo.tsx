@@ -2,6 +2,9 @@ import React from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { categoriesState, IToDo, toDoState } from "../atoms";
 
+const getToDo = window.localStorage.getItem("Todooos");
+let parsedTodo = JSON.parse(getToDo as any);
+
 function ToDo({ text, category, id }: IToDo) {
   const setToDos = useSetRecoilState(toDoState);
   const categories = useRecoilValue(categoriesState);
@@ -24,8 +27,19 @@ function ToDo({ text, category, id }: IToDo) {
   };
   const getToDos = useRecoilValue(toDoState);
   window.localStorage.setItem("Todooos", JSON.stringify(getToDos));
+  const onClick = (event: any) => {
+    const li = event.target.parentElement;
+    console.log(li);
+    parsedTodo = parsedTodo.filter(
+      (todo: any) => parseInt(todo.id) !== parseInt(li.id)
+    );
+    li.remove();
+    localStorage.removeItem("Todooos");
+    localStorage.setItem("Todooos", JSON.stringify(parsedTodo));
+  };
+
   return (
-    <li>
+    <li id={String(id)}>
       <span>{text}</span>
       <select value={category} onInput={onInput}>
         {
@@ -40,6 +54,7 @@ function ToDo({ text, category, id }: IToDo) {
           </option>
         ))}
       </select>
+      <button onClick={onClick}>Delete</button>
       {
         //Categories.Doing이 아닐 때, &&다음을 수행함.
         //원래 function에 인자를 넘기기 위해서는 onClick={()=>onClick("DOING")}이런 식으로 해야함.
@@ -50,3 +65,5 @@ function ToDo({ text, category, id }: IToDo) {
 }
 
 export default ToDo;
+
+//체크박스를 만들어서 삭제 후, 새로고침할 수 있도록 하자.
