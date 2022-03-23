@@ -45,7 +45,14 @@ const Catebutton = styled(motion.button)`
   top: 22px;
   right: 0;
 `;
-
+const btnVariants = {
+  normal: {
+    backgroundColor: "#EEE1EE",
+  },
+  hover: {
+    backgroundColor: "rgba(255, 255, 255, 0.6)",
+  },
+};
 let Catetext = [] as any;
 
 interface IForm {
@@ -92,7 +99,7 @@ function ToDoList() {
   //----------------------------------
   const [clickAdd, setClick] = useState(false);
   const toggleClick = () => {
-    setClick(true);
+    setClick((prev) => !prev);
   };
   return (
     <>
@@ -132,6 +139,9 @@ function ToDoList() {
 
             <CateForm>
               <motion.button
+                variants={btnVariants}
+                initial={"normal"}
+                whileHover={"hover"}
                 onClick={toggleClick}
                 animate={{
                   x: clickAdd ? 70 : 0,
@@ -156,6 +166,8 @@ function ToDoList() {
                   {...register("Addcategories")}
                 />
                 <Catebutton
+                  variants={btnVariants}
+                  whileHover={"hover"}
                   initial={{ scaleX: 0 }}
                   animate={{ x: clickAdd ? 0 : -70, scaleX: clickAdd ? 1 : 0 }}
                 >

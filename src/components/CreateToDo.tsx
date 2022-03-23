@@ -9,13 +9,20 @@ let todos = [] as any;
 
 const TodoForm = styled.div`
   border: none;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-
+const btnVariants = {
+  normal: {
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
+  },
+  hover: {
+    backgroundColor: "rgba(255, 255, 255, 0.6)",
+  },
+};
 interface IForm {
   toDo: string;
 }
@@ -51,6 +58,8 @@ function CreateToDo() {
   return (
     <TodoForm>
       <motion.button
+        variants={btnVariants}
+        whileHover={"hover"}
         onClick={toggleClick}
         animate={{
           x: clickAdd ? 70 : 0,
@@ -79,6 +88,8 @@ function CreateToDo() {
           })}
         />
         <motion.button
+          variants={btnVariants}
+          whileHover={"hover"}
           initial={{ scaleX: 0 }}
           animate={{ x: clickAdd ? 0 : -70, scaleX: clickAdd ? 1 : 0 }}
           style={{ position: "absolute", top: "3px", right: "0" }}
