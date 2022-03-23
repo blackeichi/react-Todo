@@ -11,6 +11,7 @@ import {
 import CreateToDo from "./CreateToDo";
 import Login from "./Login";
 import ToDo from "./ToDo";
+import { motion } from "framer-motion";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -86,8 +87,29 @@ function ToDoList() {
           <Login />
         ) : (
           <>
-            <span>Welcome! {getUsername.username}</span>
-            <button onClick={onClick}>Log Out</button>
+            <div
+              style={{
+                border: "none",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-around",
+                width: "230px",
+              }}
+            >
+              <span>Welcome! "{getUsername.username}"</span>
+              <motion.button
+                style={{
+                  height: "30px",
+                  border: "none",
+                  backgroundColor: "inherit",
+                  color: "black",
+                }}
+                onClick={onClick}
+              >
+                Log Out
+              </motion.button>
+            </div>
+
             <CateForm>
               <h1>Crate new category</h1>
               <form onSubmit={handleSubmit(onValid)}>
@@ -110,14 +132,14 @@ function ToDoList() {
               ))}
             </select>
             <CreateToDo />
+            <ToDoPaper>
+              <h1 style={{ marginBottom: "20px" }}>Todo List</h1>
+              {toDos?.map((toDo) => (
+                <ToDo key={toDo.id} {...toDo} />
+              ))}
+            </ToDoPaper>
           </>
         )}
-        <ToDoPaper>
-          <h1 style={{ marginBottom: "20px" }}>Todo List</h1>
-          {toDos?.map((toDo) => (
-            <ToDo key={toDo.id} {...toDo} />
-          ))}
-        </ToDoPaper>
       </Wrapper>
     </>
   );

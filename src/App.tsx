@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import ToDoList from "./components/ToDoList";
+import "./App.css";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -60,11 +61,43 @@ body {
   color:white;
   line-height: 1.2;
   width : 100%;
-  hight : 100vh;
+  font-family: 'Red Hat Mono', monospace;
 }
 a {
   text-decoration:none;
   color:inherit;
+}
+button{
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-top: 1px solid black;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 2px;
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div{
+  border-radius : 5px;
+  border : 1px solid rgba(0, 0, 0, 0.7);
+}
+button{
+  height: 40px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+input{
+  margin : 5px 0;
+  height: 40px;
+  border-radius: 5px;
+  padding: 0 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  border : 1px solid rgba(0, 0, 0, 0.7);
 }
 `;
 

@@ -15,7 +15,6 @@ function CreateToDo() {
   todos = parsedTodo === null ? [] : parsedTodo;
   const setTodo = () =>
     window.localStorage.setItem("Todooos", JSON.stringify(todos));
-  const ToDos = useRecoilValue(toDoState);
   const setToDos = useSetRecoilState(toDoState);
   const category = useRecoilValue(categoryState);
   const { register, handleSubmit, setValue } = useForm<IForm>();
@@ -36,7 +35,7 @@ function CreateToDo() {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleValid)}>
+    <form style={{ display: "flex" }} onSubmit={handleSubmit(handleValid)}>
       <input
         {...register("toDo", {
           required: "Please write a To Do",
