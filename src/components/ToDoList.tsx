@@ -163,20 +163,22 @@ function ToDoList() {
                 </Catebutton>
               </form>
             </CateForm>
-            <h1>To Dos</h1>
-            <select value={category} onInput={onInput}>
-              <option value={"TO_DO"}>To Do</option>
-              <option value={"DOING"}>Doing</option>
-              <option value={"DONE"}>Done</option>
-              {AddCategories?.map((addcate) => (
-                <option key={addcate.id} value={addcate.text}>
-                  {addcate.text}
-                </option>
-              ))}
-            </select>
+            <div style={{ border: "none", margin: 0, display: "flex" }}>
+              <h1 style={{ marginRight: "10px" }}>Create new schedule </h1>
+              <select value={category} onInput={onInput}>
+                <option value={"TO_DO"}>To Do</option>
+                <option value={"DOING"}>Doing</option>
+                <option value={"DONE"}>Done</option>
+                {AddCategories?.map((addcate) => (
+                  <option key={addcate.id} value={addcate.text}>
+                    {addcate.text}
+                  </option>
+                ))}
+              </select>
+            </div>
             <CreateToDo />
             <ToDoPaper>
-              <h1 style={{ marginBottom: "20px" }}>Todo List</h1>
+              <h1 style={{ marginBottom: "20px" }}>{category} List</h1>
               {toDos?.map((toDo) => (
                 <ToDo key={toDo.id} {...toDo} />
               ))}
