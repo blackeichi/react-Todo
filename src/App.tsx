@@ -68,7 +68,7 @@ a {
   color:inherit;
 }
 button{
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #EEE1EE;
   border: none;
   border-top: 1px solid black;
   height: 30px;
@@ -96,8 +96,14 @@ input{
   border-radius: 5px;
   padding: 0 10px;
   color: white;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.7);
   border : 1px solid rgba(0, 0, 0, 0.7);
+}
+select{
+  background-color : #A96EAD;
+}
+option{
+  background-color : #A96EAD;
 }
 `;
 

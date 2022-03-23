@@ -1,7 +1,6 @@
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { categoryState, toDoState, IToDo } from "../atoms";
+import { categoryState, toDoState } from "../atoms";
 
 let todos = [] as any;
 
@@ -35,14 +34,18 @@ function CreateToDo() {
   };
 
   return (
-    <form style={{ display: "flex" }} onSubmit={handleSubmit(handleValid)}>
+    <form
+      style={{ display: "flex", position: "relative" }}
+      onSubmit={handleSubmit(handleValid)}
+    >
       <input
         {...register("toDo", {
           required: "Please write a To Do",
         })}
-        placeholder="Write a to do"
       />
-      <button>Add</button>
+      <button style={{ position: "absolute", top: "2px", right: "0" }}>
+        Add
+      </button>
     </form>
   );
 }

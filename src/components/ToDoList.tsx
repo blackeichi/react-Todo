@@ -32,8 +32,18 @@ const ToDoPaper = styled.div`
   padding: 20px;
 `;
 
-const CateForm = styled.form`
+const CateForm = styled.div`
+  border: none;
   margin-bottom: 50px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const Catebutton = styled(motion.button)`
+  position: absolute;
+  top: 22px;
+  right: 0;
 `;
 
 let Catetext = [] as any;
@@ -75,10 +85,14 @@ function ToDoList() {
     //선택한 select option값에따라 atom의 category값이 변하고, selector를 이용하여 atom의 category값과 todo.category의 값이 같은 것만 출력됨
   };
   //------------------------------------------------------------
-  const [login, setLogin] = useState(false);
   const onClick = () => {
     window.localStorage.setItem("login", null as any);
     window.location.reload();
+  };
+  //----------------------------------
+  const [clickAdd, setClick] = useState(false);
+  const toggleClick = () => {
+    setClick(true);
   };
   return (
     <>
@@ -89,11 +103,15 @@ function ToDoList() {
           <>
             <div
               style={{
+                fontSize: "25px",
+                fontWeight: "700",
                 border: "none",
                 display: "flex",
+                flexDirection: "column",
                 alignItems: "center",
-                justifyContent: "space-around",
-                width: "230px",
+                justifyContent: "space-between",
+                width: "300px",
+                marginBottom: "30px",
               }}
             >
               <span>Welcome! "{getUsername.username}"</span>
@@ -102,22 +120,47 @@ function ToDoList() {
                   height: "30px",
                   border: "none",
                   backgroundColor: "inherit",
-                  color: "black",
+                  color: "#A0AFFF",
+                  fontWeight: "300",
                 }}
                 onClick={onClick}
+                whileHover={{ scale: 1.2, fontWeight: "800" }}
               >
                 Log Out
               </motion.button>
             </div>
 
             <CateForm>
+              <motion.button
+                onClick={toggleClick}
+                animate={{
+                  x: clickAdd ? 70 : 0,
+                  display: clickAdd ? "none" : "block",
+                }}
+                exit={{ display: clickAdd ? "none" : "flex" }}
+                transition={{ type: "just" }}
+                style={{
+                  position: "absolute",
+                  top: "22px",
+                  width: "30px",
+                }}
+              >
+                +
+              </motion.button>
               <h1>Crate new category</h1>
-              <form onSubmit={handleSubmit(onValid)}>
-                <input
+              <form>
+                <motion.input
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: clickAdd ? 1 : 0 }}
+                  onSubmit={handleSubmit(onValid)}
                   {...register("Addcategories")}
-                  placeholder="Create category"
                 />
-                <button>Add</button>
+                <Catebutton
+                  initial={{ scaleX: 0 }}
+                  animate={{ x: clickAdd ? 0 : -70, scaleX: clickAdd ? 1 : 0 }}
+                >
+                  Add
+                </Catebutton>
               </form>
             </CateForm>
             <h1>To Dos</h1>
